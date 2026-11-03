@@ -1,5 +1,9 @@
+import { projects } from "./data/projects";
+
 export default function App() {
   return (
-    <h1 className="text-4xl font-bold text-red-500 p-10">Hello, I'm Al Amin</h1>
+    <ul className="p-10 space-y-2">
+      {projects.map((p) => <li key={p.id}>{p.title}</li>)}
+    </ul>
   );
 }
