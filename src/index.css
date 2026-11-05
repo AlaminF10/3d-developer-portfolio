@@ -1,1 +1,155 @@
 @import "tailwindcss";
+
+/* Design tokens*/
+
+@theme {
+    --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+    --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+    --color-night: #06061a;
+    --color-night-2: #0c0c26;
+    --color-panel: #11112e;
+    --color-ink-50: #f5f3ff;
+    --color-ink-100: #e7e5f5;
+    --color-ink-200: #c9c6e0;
+    --color-ink-300: #a19ec0;
+    --color-ink-400: #7c79a0;
+    --color-ink-500: #5b5880;
+    --color-accent: #8b5cf6;
+    --color-accent-soft: #a78bfa;
+    --color-cyan: #22d3ee;
+}
+
+
+/* Base */
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    background: var(--color-night);
+    color-scheme: dark;
+}
+
+body {
+    font-family: var(--font-sans);
+    color: var(--color-ink-100);
+    background: var(--color-night);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+::selection {
+    background: rgb(139 92 246 / 0.45);
+    color: white;
+}
+
+:focus-visible {
+    outline: 2px solid var(--color-cyan);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+
+
+/* scrollbar */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-night);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #2a2650;
+    border-radius: 99px;
+    border: 2px solid var(--color-night);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #3d3775;
+}
+
+
+/*  Reusable utilities  */
+
+@utility text-gradient {
+    background: linear-gradient(100deg, #c4b5fd 0%, #8b5cf6 40%, #22d3ee 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+@utility glass {
+    background: linear-gradient(160deg, rgb(26 24 64 / 0.72), rgb(12 12 38 / 0.72));
+    border: 1px solid rgb(167 139 250 / 0.14);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+@utility gradient-border {
+    position: relative;
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 1px;
+        background: linear-gradient(140deg, rgb(167 139 250 / 0.6), rgb(34 211 238 / 0.15) 50%, rgb(167 139 250 / 0.05));
+        -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+    }
+}
+
+@utility grid-bg {
+    background-image: linear-gradient(rgb(139 92 246 / 0.06) 1px, transparent 1px), linear-gradient(90deg, rgb(139 92 246 / 0.06) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+
+
+/* Respect "reduce motion" for CSS animations too */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
+}
+
+@keyframes scroll-dot {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    80% {
+        transform: translateY(14px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+}
+
+.animate-scroll-dot {
+    animation: scroll-dot 1.8s ease-in-out infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+.animate-blink {
+    animation: blink 1s step-end infinite;
+}
