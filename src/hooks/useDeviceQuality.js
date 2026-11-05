@@ -38,13 +38,16 @@ export const QUALITY_PROFILES = {
 function detectProfileName() {
     if (typeof window === "undefined") return "high";
 
-    const reducedMotion = window.matchMedia ? .("(prefers-reduced-motion: reduce)").matches;
+    const reducedMotion =
+        window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reducedMotion) return "calm";
 
     const isMobile =
         /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
-    const fewCores = (navigator.hardwareConcurrency ? ? 8) <= 4;
-    const lowMemory = (navigator.deviceMemory ? ? 8) <= 4; // Chrome-only API; undefined elsewhere
+    const cores = navigator.hardwareConcurrency || 8;
+    const memory = navigator.deviceMemory || 8; // Chrome-only API; undefined elsewhere
+    const fewCores = cores <= 4;
+    const lowMemory = memory <= 4;
 
     return isMobile || fewCores || lowMemory ? "low" : "high";
 }
