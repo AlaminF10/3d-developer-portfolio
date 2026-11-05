@@ -17,7 +17,7 @@ export default function SocialLinks({ size = 'md', exclude = [] }) {
               className={`group glass grid ${box} place-items-center rounded-xl text-ink-200 transition hover:-translate-y-1 hover:text-white`}
               style={{ '--brand': color }}
             >
-              <Icon className="transition-colors group-hover:text-[var(--brand)]" />
+              <Icon className="transition-colors group-hover:text-(--brand)" />
             </a>
           </li>
         ))}

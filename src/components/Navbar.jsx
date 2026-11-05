@@ -40,7 +40,7 @@ export default function Navbar() {
           className="group flex items-center gap-3"
           onClick={() => setMenuOpen(false)}
         >
-          <span className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-violet-500 to-cyan-400 font-display text-sm font-bold text-night shadow-lg shadow-violet-500/30 transition-transform group-hover:rotate-6">
+          <span className="grid h-10 w-10 place-items-center rounded-xl bg-linear-to-br from-violet-500 to-cyan-400 font-display text-sm font-bold text-night shadow-lg shadow-violet-500/30 transition-transform group-hover:rotate-6">
             {profile.initials}
           </span>
           <span className="hidden font-display text-lg font-semibold text-white sm:block">
@@ -82,7 +82,7 @@ export default function Navbar() {
           <li className="ml-3">
             <a
               href="#contact"
-              className="rounded-full bg-gradient-to-r from-violet-500 to-violet-600 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-violet-600/30 transition hover:brightness-110"
+              className="rounded-full bg-linear-to-r from-violet-500 to-violet-600 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-violet-600/30 transition hover:brightness-110"
             >
               Hire me
             </a>
