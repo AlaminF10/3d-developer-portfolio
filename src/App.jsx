@@ -1,9 +1,13 @@
+import { lazy, Suspense } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Section from './components/Section';
 import { navLinks } from './data/navigation';
 import { profile } from './data/profile';
 import { useActiveSection } from './hooks/useActiveSection';
+
+// The star background is decorative, so it loads after the page content.
+const BackgroundStars = lazy(() => import('./components/BackgroundStars'));
 
 const SECTION_IDS = ['hero', ...navLinks.map(l => l.id)];
 
@@ -12,6 +16,10 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen">
+      <Suspense fallback={null}>
+        <BackgroundStars />
+      </Suspense>
+
       <Navbar />
 
       <main id="main" className="relative z-10">
@@ -25,7 +33,6 @@ export default function App() {
           </h1>
         </section>
 
-        {/* Placeholders — each one is replaced by a real section later */}
         {navLinks.map(link => (
           <Section
             key={link.id}
