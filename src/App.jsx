@@ -33,7 +33,7 @@ export default function App() {
           <h1 className="text-center font-display text-5xl font-bold text-white sm:text-7xl">
             Hi, I'm <span className="text-gradient">{profile.shortName}</span>
           </h1>
-          <div className="h-[380px] sm:h-[460px] lg:h-[600px]">
+          <div className="h-95 sm:h-115 lg:h-150">
             <SceneShell eager camera={{ position: [0, 1.4, 8.4], fov: 38 }}>
               {quality => <HeroScene quality={quality} />}
             </SceneShell>
