@@ -2,10 +2,8 @@ import { lazy, Suspense } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Section from './components/Section';
-import SceneShell from './canvas/SceneShell';
-import HeroScene from './canvas/HeroScene';
+import Hero from './sections/Hero';
 import { navLinks } from './data/navigation';
-import { profile } from './data/profile';
 import { useActiveSection } from './hooks/useActiveSection';
 
 // The star background is decorative, so it loads after the page content.
@@ -25,21 +23,9 @@ export default function App() {
       <Navbar />
 
       <main id="main" className="relative z-10">
-        {/* Temporary hero — replaced by the full Hero section on Day 4 */}
-        <section
-          id="hero"
-          className="grid min-h-screen items-center gap-6 px-5 pt-24 lg:grid-cols-2"
-        >
-          <h1 className="text-center font-display text-5xl font-bold text-white sm:text-7xl">
-            Hi, I'm <span className="text-gradient">{profile.shortName}</span>
-          </h1>
-          <div className="h-95 sm:h-115 lg:h-150">
-            <SceneShell eager camera={{ position: [0, 1.4, 8.4], fov: 38 }}>
-              {quality => <HeroScene quality={quality} />}
-            </SceneShell>
-          </div>
-        </section>
+        <Hero />
 
+        {/* Placeholders — each one is replaced by a real section later */}
         {navLinks.map(link => (
           <Section
             key={link.id}
