@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Section from './components/Section';
 import Hero from './sections/Hero';
+import About from './sections/About';
 import { navLinks } from './data/navigation';
 import { useActiveSection } from './hooks/useActiveSection';
 
@@ -10,6 +11,9 @@ import { useActiveSection } from './hooks/useActiveSection';
 const BackgroundStars = lazy(() => import('./components/BackgroundStars'));
 
 const SECTION_IDS = ['hero', ...navLinks.map(l => l.id)];
+
+// Sections already built — everything else still shows a placeholder.
+const BUILT = ['about'];
 
 export default function App() {
   useActiveSection(SECTION_IDS);
@@ -24,18 +28,20 @@ export default function App() {
 
       <main id="main" className="relative z-10">
         <Hero />
+        <About />
 
-        {/* Placeholders — each one is replaced by a real section later */}
-        {navLinks.map(link => (
-          <Section
-            key={link.id}
-            id={link.id}
-            eyebrow={link.label}
-            title={`${link.label} section`}
-          >
-            <div className="glass h-64 rounded-3xl" />
-          </Section>
-        ))}
+        {navLinks
+          .filter(link => !BUILT.includes(link.id))
+          .map(link => (
+            <Section
+              key={link.id}
+              id={link.id}
+              eyebrow={link.label}
+              title={`${link.label} section`}
+            >
+              <div className="glass h-64 rounded-3xl" />
+            </Section>
+          ))}
       </main>
 
       <Footer />
