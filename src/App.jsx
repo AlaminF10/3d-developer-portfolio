@@ -1,12 +1,12 @@
 import { lazy, Suspense } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import Section from './components/Section';
 import Hero from './sections/Hero';
 import About from './sections/About';
 import Skills from './sections/Skills';
 import Projects from './sections/Projects';
 import Journey from './sections/Journey';
+import Contact from './sections/Contact';
 import { navLinks } from './data/navigation';
 import { useActiveSection } from './hooks/useActiveSection';
 
@@ -14,9 +14,6 @@ import { useActiveSection } from './hooks/useActiveSection';
 const BackgroundStars = lazy(() => import('./components/BackgroundStars'));
 
 const SECTION_IDS = ['hero', ...navLinks.map(l => l.id)];
-
-// Sections already built — everything else still shows a placeholder.
-const BUILT = ['about', 'skills', 'projects', 'journey'];
 
 export default function App() {
   useActiveSection(SECTION_IDS);
@@ -35,19 +32,7 @@ export default function App() {
         <Skills />
         <Projects />
         <Journey />
-
-        {navLinks
-          .filter(link => !BUILT.includes(link.id))
-          .map(link => (
-            <Section
-              key={link.id}
-              id={link.id}
-              eyebrow={link.label}
-              title={`${link.label} section`}
-            >
-              <div className="glass h-64 rounded-3xl" />
-            </Section>
-          ))}
+        <Contact />
       </main>
 
       <Footer />
