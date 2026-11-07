@@ -5,6 +5,7 @@ import Section from './components/Section';
 import Hero from './sections/Hero';
 import About from './sections/About';
 import Skills from './sections/Skills';
+import Projects from './sections/Projects';
 import { navLinks } from './data/navigation';
 import { useActiveSection } from './hooks/useActiveSection';
 
@@ -14,7 +15,7 @@ const BackgroundStars = lazy(() => import('./components/BackgroundStars'));
 const SECTION_IDS = ['hero', ...navLinks.map(l => l.id)];
 
 // Sections already built — everything else still shows a placeholder.
-const BUILT = ["about", "skills"];
+const BUILT = ['about', 'skills', 'projects'];
 
 export default function App() {
   useActiveSection(SECTION_IDS);
@@ -31,6 +32,7 @@ export default function App() {
         <Hero />
         <About />
         <Skills />
+        <Projects />
 
         {navLinks
           .filter(link => !BUILT.includes(link.id))
