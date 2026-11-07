@@ -1,9 +1,10 @@
-import { motion } from 'framer-motion';
+import { useMemo, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { FaGithub } from 'react-icons/fa';
 import { HiExternalLink } from 'react-icons/hi';
 import Section from '../components/Section';
 import TiltCard from '../components/TiltCard';
-import { projects } from '../data/projects';
+import { projectCategories, projects } from '../data/projects';
 import { socials } from '../data/socials';
 
 function Cover({ project }) {
@@ -95,8 +96,20 @@ function ProjectCard({ project, large }) {
 }
 
 export default function Projects() {
+  const [filter, setFilter] = useState('All');
   const github = socials.find(s => s.name === 'GitHub');
+
   const featured = projects.filter(p => p.featured);
+  const others = useMemo(
+    () =>
+      projects.filter(
+        p => !p.featured && (filter === 'All' || p.category === filter),
+      ),
+    [filter],
+  );
+  const otherCategories = projectCategories.filter(
+    c => c === 'All' || projects.some(p => !p.featured && p.category === c),
+  );
 
   return (
     <Section
@@ -123,6 +136,58 @@ export default function Projects() {
           </motion.div>
         ))}
       </div>
+
+      {/* More projects with filter */}
+      {otherCategories.length > 1 && (
+        <div className="mt-20">
+          <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+            <h3 className="font-display text-2xl font-bold text-white">
+              More projects
+            </h3>
+            <div
+              role="tablist"
+              aria-label="Filter projects"
+              className="flex flex-wrap gap-2"
+            >
+              {otherCategories.map(c => (
+                <button
+                  key={c}
+                  role="tab"
+                  aria-selected={filter === c}
+                  onClick={() => setFilter(c)}
+                  className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${
+                    filter === c
+                      ? 'bg-violet-500 text-white'
+                      : 'bg-white/5 text-ink-300 hover:text-white'
+                  }`}
+                >
+                  {c}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <motion.div
+            layout
+            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          >
+            <AnimatePresence mode="popLayout">
+              {others.map(p => (
+                <motion.div
+                  key={p.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.92 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.92 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ProjectCard project={p} />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+        </div>
+      )}
 
       <div className="mt-14 text-center">
         <a
