@@ -20,6 +20,13 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen">
+      <a
+        href="#main"
+        className="sr-only z-100 rounded-md bg-accent px-4 py-2 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+      >
+        Skip to content
+      </a>
+
       <Suspense fallback={null}>
         <BackgroundStars />
       </Suspense>
