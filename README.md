@@ -1,5 +1,7 @@
 # 3D Developer Portfolio — Md Al Amin
 
+**🌐 Live demo: [md-al-amin.vercel.app](https://md-al-amin.vercel.app)**
+
 An interactive 3D portfolio built with **React, Three.js and React Three
 Fiber**. A procedurally-built developer desk (with a live "typing" code screen)
 in the hero, a rotating 3D skills globe, a 3D planet in the contact section, and
