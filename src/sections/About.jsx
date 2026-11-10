@@ -5,7 +5,7 @@ import { profile } from '../data/profile';
 import { fadeIn, fadeUp, stagger } from '../utils/motion';
 
 // Put a square photo at public/profile.jpg and set this to "/profile.jpg".
-const PHOTO = null;
+const PHOTO = '/profile.jpg';
 
 export default function About() {
   return (
