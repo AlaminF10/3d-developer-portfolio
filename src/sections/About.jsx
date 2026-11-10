@@ -37,7 +37,7 @@ export default function About() {
                 />
               ) : (
                 <div className="grid h-full place-items-center">
-                  <span className="font-display text-8xl font-bold text-white/90 drop-shadow-xl [transform:translateZ(40px)]">
+                  <span className="font-display text-8xl font-bold text-white/90 drop-shadow-xl transform-[translateZ(40px)]">
                     {profile.initials}
                   </span>
                 </div>
